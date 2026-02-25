@@ -1,0 +1,74 @@
+# Bridge CLI - Spring Boot Fine-Tuning Configuration
+# Optimized for RunPod with budget GPU (RTX 4090/A5000 24GB)
+# Using QLoRA for memory efficiency
+
+base_model: deepseek-ai/deepseek-coder-6.7b-instruct
+model_type: AutoModelForCausalLM
+tokenizer_type: AutoTokenizer
+trust_remote_code: true
+
+# QLoRA Configuration (enables training on 24GB GPU)
+load_in_4bit: true
+adapter: qlora
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target_linear: true
+lora_target_modules:
+  - q_proj
+  - v_proj
+  - k_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+
+# Dataset Configuration
+datasets:
+  - path: /workspace/datasets/spring-boot-dataset.jsonl
+    type: alpaca
+    
+dataset_prepared_path: /workspace/prepared_data
+val_set_size: 0.05
+output_dir: /workspace/outputs/spring-boot-coder
+
+# Training Parameters
+sequence_len: 2048
+sample_packing: true
+pad_to_sequence_len: true
+
+micro_batch_size: 2
+gradient_accumulation_steps: 4
+num_epochs: 3
+learning_rate: 0.0002
+lr_scheduler: cosine
+warmup_ratio: 0.03
+optimizer: adamw_8bit
+
+# Memory Optimization
+gradient_checkpointing: true
+flash_attention: true
+bf16: auto
+tf32: false
+
+# Training Settings
+train_on_inputs: false
+group_by_length: false
+logging_steps: 10
+save_strategy: steps
+save_steps: 100
+eval_steps: 100
+
+# Weights & Biases (optional - remove if not using)
+# wandb_project: bridge-cli
+# wandb_run_id: spring-boot-finetune
+
+# Early stopping
+early_stopping_patience: 3
+
+# For debugging - set to true to test config
+debug: false
+
+# Special tokens
+special_tokens:
+  pad_token: "<|pad|>"
