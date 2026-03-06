@@ -1,0 +1,37 @@
+[project]
+name = "bridge-cli"
+version = "0.1.0"
+description = "Bridge CLI - Spring Boot dataset generator and model testing tools"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = [
+    "--strict-markers",
+    "--tb=short",
+    "-q",
+]
+
+[tool.coverage.run]
+source = ["scripts"]
+omit = [
+    "scripts/__pycache__/*",
+]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.",
+    "pass",
+]
