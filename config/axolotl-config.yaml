@@ -27,10 +27,12 @@ lora_target_modules:
 datasets:
   - path: /workspace/datasets/spring-boot-dataset.jsonl
     type: alpaca
-    
+  - path: /workspace/datasets/react-dataset.jsonl
+    type: alpaca
+
 dataset_prepared_path: /workspace/prepared_data
 val_set_size: 0.05
-output_dir: /workspace/outputs/spring-boot-coder
+output_dir: /workspace/outputs/bridge-cli
 
 # Training Parameters
 sequence_len: 2048
