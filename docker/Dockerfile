@@ -10,7 +10,7 @@
 # Build locally:
 #   docker build -t davidjbarnes/bridge-cli-training -f docker/Dockerfile .
 
-FROM winglian/axolotl:main-cu124-2.4.0
+FROM winglian/axolotl:main
 
 LABEL maintainer="DavidJBarnes"
 LABEL description="Bridge CLI - Fine-tuning environment for Java/React code model"
