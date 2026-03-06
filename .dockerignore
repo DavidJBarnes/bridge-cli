@@ -1,0 +1,14 @@
+.git
+.github
+.gitignore
+.coverage
+.pytest_cache
+__pycache__
+htmlcov
+tests
+*.md
+!README.md
+pyproject.toml
+0-claude-*
+1-claude-*
+2-claude-*
